@@ -154,7 +154,7 @@ public class Node {
                             Vector<Integer> newVec = (Vector<Integer>) fatherVec.clone();
                             newVec.add(sendTo.id);
                             mess2.graph_path = newVec;
-                            System.out.println("Trying to send to " + sendTo);
+//                            System.out.println("Trying to send to " + sendTo);
                             networkManager.sendMessage(sendTo, mess2);
 //                        }
                     }
