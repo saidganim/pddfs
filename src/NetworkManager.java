@@ -35,7 +35,7 @@ public class NetworkManager {
         }
         mess.id = this.id;
         Socket socket = null;
-        //System.out.println("SENDS " + mess.toString() + " TO " + addr.id);
+        System.out.println("SENDS " + mess.toString() + " TO " + addr.id);
         try {
             socket= new Socket(addr.addr.getKey(), addr.addr.getValue());
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
@@ -56,8 +56,8 @@ public class NetworkManager {
         try {
             ssocket = new ServerSocket(this.port);
         } catch (IOException e) {
-            //System.out.println("Server Socket IOException");
-            //System.exit(1);
+            System.out.println("Server Socket IOException");
+            System.exit(1);
         }
         this.nodeInstance = node;
 
@@ -75,7 +75,7 @@ public class NetworkManager {
 //                        ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
 //                        os.writeObject(_mess);
 //                    } catch (IOException e) {
-//                        //System.out.println("Can't respond to message");
+//                        System.out.println("Can't respond to message");
 //                    }
                 }
                 Socket socket = nextMess.sender;
@@ -101,14 +101,14 @@ public class NetworkManager {
                 newMessage.data = _mess;
                 newMessage.sender = socket;
                 synchronized (messageBuffer){
-                    //System.out.println("NODE-" + this.nodeInstance._id + " ARRIVED " + _mess.toString());
+                    System.out.println("NODE-" + this.nodeInstance._id + " ARRIVED " + _mess.toString());
                     messageBuffer.add(newMessage);
                     messageBuffer.notify();
                 }
                 socket.close();
 
             } catch (ClassNotFoundException e) {
-                //System.out.println("Can't read Message");
+                System.out.println("Can't read Message");
             }
         }
     }
