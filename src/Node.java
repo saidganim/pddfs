@@ -92,6 +92,7 @@ public class Node {
             _Message mess = new _Message();
             mess.messageType = _Message.MessageType.TERMINATE;
             networkManager.sendMessage(father, mess);
+            System.out.println("NON-INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start));
             return;
         }
 //        System.out.println("INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; children: " + children + "; Time : " +  (System.currentTimeMillis() - Main.start));
