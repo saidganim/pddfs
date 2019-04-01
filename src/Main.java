@@ -114,7 +114,7 @@ public class Main {
         try {
             ip = InetAddress.getLocalHost();
             hostname = ip.getHostName();
-//            System.out.println("Your current IP address : " + ip);
+            System.out.println("Your current IP address : " + ip);
 //            System.out.println("Your current Hostname : " + hostname);
 
         } catch (UnknownHostException e) {
@@ -130,7 +130,7 @@ public class Main {
         result[0].id = das4_network.indexOf(ip.toString()) + 1;
         result[0].links = new ArrayList<NodeInstance>();
         for(String das4_node : das4_network){
-            if(ip.toString() == das4_node)
+            if(ip.toString().substring(8) == das4_node.substring(8))
                 continue;
             result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_node.substring(8), 1111),das4_network.indexOf(das4_node) + 1));
         }
