@@ -135,11 +135,11 @@ public class Main {
         result[0].initiator = das4_network.indexOf(ip.toString()) == 0? true : false;
         result[0].id = das4_network.indexOf(ip.toString()) + 1;
         result[0].links = new ArrayList<NodeInstance>();
-        int index = das4_network.indexOf(ip.toString());
+        int index = das4_network.indexOf(ip.toString()) + 1;
 
         int level = log(index, 2);
         int parentid = (int) (Math.pow(2, level - 1) + Math.floor((index - Math.pow(2, level)) / 2)) - 1;
-        int childid = (int) (Math.pow(2, level + 1) + 2 * (index - Math.pow(2, level))) + 1;
+        int childid = (int) (Math.pow(2, level + 1) + 2 * (index - Math.pow(2, level))) - 1;
 
         // link to a parent
         if(!result[0].initiator)
