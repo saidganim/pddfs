@@ -59,19 +59,22 @@ public class Node {
 
 
 
-    synchronized private void moveOn(Vector<Integer> vectr){
-        _Message mess = new _Message();
-        mess.messageType =  _Message.MessageType.DISCOVER;
-        if(father != null)
-            toNotify.remove(father);
-        for(NodeInstance node : toNotify){
-            children.add(node);
-            toTerminate.add(node);
-            Vector<Integer> newVec = (Vector<Integer>) vectr.clone();
-            newVec.add(node.id);
-            mess.graph_path = newVec;
-            networkManager.sendMessage(node, mess);
+    private void moveOn(Vector<Integer> vectr){
+        synchronized (children){
+            _Message mess = new _Message();
+            mess.messageType =  _Message.MessageType.DISCOVER;
+            if(father != null)
+                toNotify.remove(father);
+            for(NodeInstance node : toNotify){
+                children.add(node);
+                toTerminate.add(node);
+                Vector<Integer> newVec = (Vector<Integer>) vectr.clone();
+                newVec.add(node.id);
+                mess.graph_path = newVec;
+                networkManager.sendMessage(node, mess);
+            }
         }
+
     }
 
     int vectorCompare(Vector<Integer> a, Vector<Integer> b){
@@ -141,8 +144,7 @@ public class Node {
                                 toTerminate.remove(sender);
                                 children.remove(sender);
                                 mess2.messageType = _Message.MessageType.REJECT;
-                            } else
-                                return null;
+                            }
 
                         } else {
                             sendTo = sender;
