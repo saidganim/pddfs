@@ -142,6 +142,7 @@ public class Main {
         int childid = (int) (Math.pow(2, level + 1) + 2 * (index - Math.pow(2, level)));
 
         // link to a parent
+        if(!result[0].initiator)
         result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(parentid).substring(8), 1111),das4_network.indexOf(das4_network.get(parentid)) + 1));
 
         // links to children
