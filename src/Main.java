@@ -138,8 +138,8 @@ public class Main {
         int index = das4_network.indexOf(ip.toString());
 
         int level = log(index, 2);
-        int parentid = (int) (Math.pow(2, level - 1) + Math.floor((index - Math.pow(2, level)) / 2));
-        int childid = (int) (Math.pow(2, level + 1) + 2 * (index - Math.pow(2, level)));
+        int parentid = (int) (Math.pow(2, level - 1) + Math.floor((index - Math.pow(2, level)) / 2)) - 1;
+        int childid = (int) (Math.pow(2, level + 1) + 2 * (index - Math.pow(2, level))) + 1;
 
         // link to a parent
         if(!result[0].initiator)
