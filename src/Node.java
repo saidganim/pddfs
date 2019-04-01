@@ -127,6 +127,7 @@ public class Node {
                         moveOn(mess.graph_path); // passing DISCOVER further
                         if(children.size() == 0)
                             deactivate();
+                        return null;
                     } else {
                         if(vectorCompare(fatherVec, mess.graph_path) == 1){
                             // new candidate to be the parent link
