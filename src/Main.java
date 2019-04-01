@@ -143,7 +143,7 @@ public class Main {
 
         // link to a parent
         if(!result[0].initiator)
-        result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(parentid).substring(8), 1111),das4_network.indexOf(das4_network.get(parentid)) + 1));
+            result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(parentid).substring(8), 1111),das4_network.indexOf(das4_network.get(parentid)) + 1));
 
         // links to children
         if(childid < das4_network.size())
