@@ -141,7 +141,8 @@ public class Node {
                                 toTerminate.remove(sender);
                                 children.remove(sender);
                                 mess2.messageType = _Message.MessageType.REJECT;
-                            }
+                            } else
+                                return null;
 
                         } else {
                             sendTo = sender;
