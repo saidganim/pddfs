@@ -10,6 +10,9 @@ public class Config {
 
     public Config(){
         id = ++counter;
-        port = 1110 + id;
+        port = 1111;
+    }
+    public String toString(){
+        return "NODE {" + id + "}";
     }
 }

@@ -259,6 +259,7 @@ public class Main {
 
         for(int i = 0; i < configs.length; ++i){
             final Config conf = configs[i];
+            System.out.println("STARTED NODE " + conf);
             fs.add(() -> {
                 Node node = new Node(conf);
             });
