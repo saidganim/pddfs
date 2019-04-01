@@ -145,8 +145,10 @@ public class Main {
         result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(parentid).substring(8), 1111),das4_network.indexOf(das4_network.get(parentid)) + 1));
 
         // links to children
-        result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(childid).substring(8), 1111),das4_network.indexOf(das4_network.get(childid)) + 1));
-        result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(childid + 1).substring(8), 1111),das4_network.indexOf(das4_network.get(childid + 1)) + 1));
+        if(childid < das4_network.size())
+            result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(childid).substring(8), 1111),das4_network.indexOf(das4_network.get(childid)) + 1));
+        if(childid + 1 < das4_network.size())
+            result[0].links. add(new NodeInstance(new Pair<String, Integer>(das4_network.get(childid + 1).substring(8), 1111),das4_network.indexOf(das4_network.get(childid + 1)) + 1));
 
 //        for(String das4_node : das4_network){
 //            if(ip.toString().substring(8).equals(das4_node.substring(8)))
