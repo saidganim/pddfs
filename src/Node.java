@@ -38,6 +38,7 @@ public class Node {
             if(config.initiator) {
                 fatherVec = new Vector<Integer>();
                 Thread.sleep(5000);
+                System.out.println("INITIATOR STARTS ACTIVITY :)");
                 synchronized (children){
                     moveOn(new Vector<Integer>());
                     if(children.size() == 0) deactivate();
