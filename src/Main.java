@@ -73,13 +73,13 @@ public class Main {
         // 10.141.0.49, 10.141.0.50, 10.141.0.51
 
         ArrayList<String> das4_network = new ArrayList<String>(){{
-            add("node002/10.141.0.2");
-            add("node003/10.141.0.3");
-            add("node004/10.141.0.4");
-            add("node005/10.141.0.5");
-            add("node006/10.141.0.6");
-            add("node007/10.141.0.7");
-            add("node008/10.141.0.8");
+//            add("node002/10.141.0.2");
+//            add("node003/10.141.0.3");
+//            add("node004/10.141.0.4");
+//            add("node005/10.141.0.5");
+//            add("node006/10.141.0.6");
+//            add("node007/10.141.0.7");
+//            add("node008/10.141.0.8");
             add("node010/10.141.0.10");
             add("node012/10.141.0.12");
             add("node013/10.141.0.13");
@@ -93,8 +93,8 @@ public class Main {
             add("node021/10.141.0.21");
             add("node022/10.141.0.22");
             add("node023/10.141.0.23");
-            add("node026/10.141.0.26");
-            add("node027/10.141.0.27");
+//            add("node026/10.141.0.26");
+//            add("node027/10.141.0.27");
             add("node030/10.141.0.30");
             add("node031/10.141.0.31");
             add("node040/10.141.0.40");
@@ -112,7 +112,7 @@ public class Main {
             add("node060/10.141.0.60");
             add("node061/10.141.0.61");
             add("node062/10.141.0.62");
-            add("node065/10.141.0.65");
+//            add("node065/10.141.0.65");
         }};
         InetAddress ip = null;
         String hostname;
