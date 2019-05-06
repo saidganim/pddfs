@@ -29,7 +29,7 @@ public class Main {
 
     public static Integer counter = 0;
     public static Long start;
-    private static int NODENUM = 40;
+    private static int NODENUM = 5;
     private static int PROBABILITY = 100; // percentage
 
 //    private static Config[] config_generator(){
@@ -48,6 +48,7 @@ public class Main {
 //        Random rand = new Random();
 //        for(int i = 0; i < NODENUM; ++i){
 //            configs[i].links = new ArrayList<NodeInstance>();
+//            configs[i].port = 1111 + i;
 //            for(int j = 0; j <= i; ++j){
 //
 //                if(j == i || rand.nextInt(100) > PROBABILITY)

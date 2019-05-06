@@ -141,7 +141,7 @@ public class Node {
                         } else if (vectorCompare(fatherVec, mess.graph_path) == 0){
                             // we have to reject it only if sender has better parent then current link
                             sendTo = sender;
-                            if(sender.id > mess.graph_path.get(fatherVec.size())){
+                            if(fatherVec.size() < mess.graph_path.size()){
                                 toTerminate.remove(sender);
                                 children.remove(sender);
                                 mess2.messageType = _Message.MessageType.REJECT;

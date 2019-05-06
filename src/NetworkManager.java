@@ -56,7 +56,7 @@ public class NetworkManager {
         try {
             ssocket = new ServerSocket(this.port);
         } catch (IOException e) {
-            //System.out.println("Server Socket IOException");
+            System.out.println( this.port + " Server Socket IOException " + e);
             //System.exit(1);
         }
         this.nodeInstance = node;
