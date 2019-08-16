@@ -17,8 +17,11 @@ public class NodeInstance {
         return true;
     }
 
+//    public String toString(){
+//        return "Object NodeInstance{id:" + id + ";addr:" + addr + "}";
+//    }
     public String toString(){
-        return "Object NodeInstance{id:" + id + ";addr:" + addr + "}";
+        return "" + id;
     }
 }
 

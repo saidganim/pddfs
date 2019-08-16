@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Collections;
 
 public class Node {
 
@@ -37,7 +38,7 @@ public class Node {
             new Thread(f).start(); // starting listener in separate thread;
             if(config.initiator) {
                 fatherVec = new Vector<Integer>();
-                Thread.sleep(5000);
+                Thread.sleep(500);
                 System.out.println("INITIATOR STARTS ACTIVITY :)");
                 synchronized (children){
                     moveOn(new Vector<Integer>());
@@ -65,6 +66,7 @@ public class Node {
             mess.messageType =  _Message.MessageType.DISCOVER;
             if(father != null)
                 toNotify.remove(father);
+            Collections.reverse(toNotify);
             for(NodeInstance node : toNotify){
                 children.add(node);
                 toTerminate.add(node);
@@ -95,11 +97,11 @@ public class Node {
             _Message mess = new _Message();
             mess.messageType = _Message.MessageType.TERMINATE;
             networkManager.sendMessage(father, mess);
-            System.out.println("NON-INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start));
+            System.out.println( "[" + this.networkManager.id + "]NON-INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start) + " :: Childern : " + children);
             return;
         }
-//        System.out.println("INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; children: " + children + "; Time : " +  (System.currentTimeMillis() - Main.start));
-        System.out.println("INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start));
+        System.out.println("[" + this.networkManager.id + "]INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; children: " + children + "; Time : " +  (System.currentTimeMillis() - Main.start));
+//        System.out.println("INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start));
         System.exit(0);
     }
 
@@ -141,7 +143,7 @@ public class Node {
                         } else if (vectorCompare(fatherVec, mess.graph_path) == 0){
                             // we have to reject it only if sender has better parent then current link
                             sendTo = sender;
-                            if(fatherVec.size() < mess.graph_path.size()){
+                            if(fatherVec.size() < mess.graph_path.size() && mess.graph_path.get(fatherVec.size()) < sender.id){
                                 toTerminate.remove(sender);
                                 children.remove(sender);
                                 mess2.messageType = _Message.MessageType.REJECT;
