@@ -12,8 +12,10 @@ public class Node {
     private boolean initiator;
     private ArrayList<NodeInstance> links;
     private CopyOnWriteArrayList<NodeInstance> toNotify;
+    private CopyOnWriteArrayList<NodeInstance> edges;
     private HashSet<NodeInstance> toTerminate = new HashSet<NodeInstance>();
     private HashSet<NodeInstance> children = new HashSet<NodeInstance>();
+    private HashSet<NodeInstance> rejected = new HashSet<NodeInstance>();
     private NodeInstance father;
     private Vector<Integer> fatherVec;
     public int _id;
@@ -25,6 +27,8 @@ public class Node {
         this.links = config.links;
         _id = config.id;
         this.toNotify = new CopyOnWriteArrayList<NodeInstance>(links);
+        this.edges = new CopyOnWriteArrayList<NodeInstance>(links);
+
         this.networkManager.setNodesList(this.links);
         this.networkManager.id = _id;
         this.networkManager.init(this);
@@ -64,10 +68,12 @@ public class Node {
         synchronized (children){
             _Message mess = new _Message();
             mess.messageType =  _Message.MessageType.DISCOVER;
-            if(father != null)
-                toNotify.remove(father);
+//            if(father != null)
+//                toNotify.remove(father);
             Collections.reverse(toNotify);
             for(NodeInstance node : toNotify){
+                if (father == node) continue;
+                if (children.contains(node)) continue;
                 children.add(node);
                 toTerminate.add(node);
                 Vector<Integer> newVec = (Vector<Integer>) vectr.clone();
@@ -102,6 +108,11 @@ public class Node {
         }
         System.out.println("[" + this.networkManager.id + "]INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; children: " + children + "; Time : " +  (System.currentTimeMillis() - Main.start));
 //        System.out.println("INITIATOR FINISHED THE TASK : " + Main.counter + " Messages are sent; Time : " +  (System.currentTimeMillis() - Main.start));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.exit(0);
     }
 
@@ -109,17 +120,16 @@ public class Node {
         NodeInstance sender = getLink(mess.sender);
         NodeInstance sendTo = null;
         synchronized (children){
+            if((father != null && father.equals(sender)))
+                return null;
             switch(mess.messageType){
                 case REJECT:
                     children.remove(sender);
                     toTerminate.remove(sender);
-
                     if(toTerminate.size() == 0)
                         deactivate();
                     break;
                 case DISCOVER:
-                    if((father != null && father.equals(sender)))
-                        return null;
                     _Message mess2 = new _Message();
                     mess2.messageType = _Message.MessageType.DISCOVER;
                     if(father == null && !initiator){
@@ -127,6 +137,7 @@ public class Node {
                         father = sender;
                         fatherVec = mess.graph_path;
                         moveOn(mess.graph_path); // passing DISCOVER further
+                        System.out.println("NEW LINK Node " + this.networkManager.id + " Attached to " + father.id + " with " + fatherVec);
                         if(children.size() == 0)
                             deactivate();
                         return null;
@@ -140,6 +151,8 @@ public class Node {
                             children.remove(sender);
                             toTerminate.remove(sender);
                             father = sender;
+                            System.out.println("NEW LINK Node " + this.networkManager.id + " Attached to " + father.id + " with " + fatherVec);
+                            moveOn(mess.graph_path);
                         } else if (vectorCompare(fatherVec, mess.graph_path) == 0){
                             // we have to reject it only if sender has better parent then current link
                             sendTo = sender;

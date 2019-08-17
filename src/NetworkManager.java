@@ -35,7 +35,7 @@ public class NetworkManager {
         }
         mess.id = this.id;
         Socket socket = null;
-        //System.out.println("SENDS " + mess.toString() + " TO " + addr.id);
+        System.out.println("SENDS " + mess.toString() + " TO " + addr.id);
         try {
             socket= new Socket(addr.addr.getKey(), addr.addr.getValue());
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
@@ -101,7 +101,7 @@ public class NetworkManager {
                 newMessage.data = _mess;
                 newMessage.sender = socket;
                 synchronized (messageBuffer){
-                    //System.out.println("NODE-" + this.nodeInstance._id + " ARRIVED " + _mess.toString());
+                    System.out.println("NODE-" + this.nodeInstance._id + " ARRIVED " + _mess.toString());
                     messageBuffer.add(newMessage);
                     messageBuffer.notify();
                 }

@@ -19,6 +19,6 @@ public class _Message implements Serializable{
         }
     }
     public String toString(){
-        return  _type() + " FROM " + id;
+        return  _type() + " FROM " + id + " WITH " + graph_path;
     }
 }
